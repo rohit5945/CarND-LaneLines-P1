@@ -18,14 +18,11 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[flow]: ./results/flow.jpg "Flow"
-[formula]: ./results/formula.png "Formula"
-[hough]:  ./results/hough.png "hough transform"
-[grayscale]: ./test_images_output/grascale.PNG
-[hough]: ./test_images_output/hough.PNG
-[canny]: ./test_images_output/canny.PNG
-[result]: ./test_images_output/final.PNG
-[roi]:  ./test_images_output/region.PNG
+[grayscale]: ./test_images_output/grayscale.PNG "grayscale"
+[hough]: ./test_images_output/hough.PNG "hough"
+[canny]: ./test_images_output/canny.PNG "canny"
+[result]: ./test_images_output/final.PNG "final"
+[roi]:  ./test_images_output/region.PNG "reegion of intrest"
 ---
 
 
@@ -39,7 +36,7 @@ The goals / steps of this project are the following:
 	* Each pixel can now be represented by a 8-bit integer number(0-255) 
 	
     	<p align="center">
-		<img width="25%" height="25%" alt="grayscale" src="./test_images_output/grascale.PNG">
+		<img width="25%" height="25%" alt="grayscale" src="./test_images_output/grayscale.PNG">
 	    </p>
 
  
