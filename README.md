@@ -1,56 +1,106 @@
 # **Finding Lane Lines on the Road** 
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-<img src="examples/laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
+## By Rohit Kukreja
 
-Overview
+
 ---
 
-When we drive, we use our eyes to decide where to go.  The lines on the road that show us where the lanes are act as our constant reference for where to steer the vehicle.  Naturally, one of the first things we would like to do in developing a self-driving car is to automatically detect lane lines using an algorithm.
+**Finding Lane Lines on the Road**
 
-In this project you will detect lane lines in images using Python and OpenCV.  OpenCV means "Open-Source Computer Vision", which is a package that has many useful tools for analyzing images.  
+The goals / steps of this project are the following:
+* Building a pipeline that finds lane lines on the road
+* Trying the pipeline on real videos
 
-To complete the project, two files will be submitted: a file containing project code and a file containing a brief write up explaining your solution. We have included template files to be used both for the [code](https://github.com/udacity/CarND-LaneLines-P1/blob/master/P1.ipynb) and the [writeup](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md).The code file is called P1.ipynb and the writeup template is writeup_template.md 
+**Youtube video**
 
-To meet specifications in the project, take a look at the requirements in the [project rubric](https://review.udacity.com/#!/rubrics/322/view)
-
-
-Creating a Great Writeup
----
-For this project, a great writeup should provide a detailed response to the "Reflection" section of the [project rubric](https://review.udacity.com/#!/rubrics/322/view). There are three parts to the reflection:
-
-1. Describe the pipeline
-
-2. Identify any shortcomings
-
-3. Suggest possible improvements
-
-We encourage using images in your writeup to demonstrate how your pipeline works.  
-
-All that said, please be concise!  We're not looking for you to write a book here: just a brief description.
-
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup. Here is a link to a [writeup template file](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md). 
+[![Link](https://img.youtube.com/vi/n7wvolM8rtw/0.jpg)](https://www.youtube.com/watch?v=YhvG0UEnv2c)
 
 
-The Project
+[//]: # (Image References)
+
+[flow]: ./results/flow.jpg "Flow"
+[formula]: ./results/formula.png "Formula"
+[hough]:  ./results/hough.png "hough transform"
+[grayscale]: ./test_images_output/grascale.png
+[hough]: ./test_images_output/hough.png
+[canny]: ./test_images_output/canny.png
+[result]: ./test_images_output/final.png
+[roi]:  ./test_images_output/region.png
 ---
 
-## If you have already installed the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) you should be good to go!   If not, you should install the starter kit to get started on this project. ##
 
-**Step 1:** Set up the [CarND Term1 Starter Kit](https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/83ec35ee-1e02-48a5-bdb7-d244bd47c2dc/lessons/8c82408b-a217-4d09-b81d-1bda4c6380ef/concepts/4f1870e0-3849-43e4-b670-12e6f2d4b7a7) if you haven't already.
+### Pipeline Overview
 
-**Step 2:** Open the code in a Jupyter Notebook
+### 1. Pipeline description
 
-You will complete the project code in a Jupyter notebook.  If you are unfamiliar with Jupyter Notebooks, check out [Udacity's free course on Anaconda and Jupyter Notebooks](https://classroom.udacity.com/courses/ud1111) to get started.
+### My pipeline consisted of the following steps:
+- 1)	Convert to grayscale: 
+	* We process the image or frame within the video by changing colorful images to grayscale.
+	* Each pixel can now be represented by a 8-bit integer number(0-255) 
+	
+    	<p align="center">
+		<img width="25%" height="25%" alt="grayscale" src="./test_images_output/grascale.png">
+	    </p>
 
-Jupyter is an Ipython notebook where you can run blocks of code and see results interactively.  All the code for this project is contained in a Jupyter notebook. To start Jupyter in your browser, use terminal to navigate to your project directory and then run the following command at the terminal prompt (be sure you've activated your Python 3 carnd-term1 environment as described in the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) installation instructions!):
+ 
+- 2)	Smoothing:
+    *  Gaussian smoothing is used to removed unwanted noise in the image since in the next step we want to detect edges
+    *  We consider kernel size of 5x5.
+    
+- 3)	Canny Edge Detection::
+    *  Lanes have different color from its neighboring hence a state of art algorithm Canny edge detection is applied on the Gaussian smoothed image to detect relevant edges in the image.
+    
+    
+	    <p align="center">
+		<img width="25%" height="25%" alt="Canny edge detection" src="./test_images_output/canny.png">
+	    </p>
+	    
+- 4)	Region of interest:
+    *  In previous step we get a lot edges over the image but since we are interested only in the lanes in image hence we restrict ourselves over a small portion of images known as region of interest
+    *  A quadrilateral of interested width and height is selected to detect only the road lane marking.
+    
+    
+	    <p align="center">
+		<img width="25%" height="25%" alt="region of interest" src="./test_images_output/roi.png">
+	    </p>
+- 5)	5)	Hough transform:
+    *  Previous steps gives us many points as edges of lane but we are more interested in continuous edge line. 
+    *  We find a line passing through all those points thus we use hough transformation to find a set of continuous lines .
+    
+    
+	    <p align="center">
+		<img width="25%" height="25%" alt="hough space" src="./test_images_output/hough.png">
+	    </p>
+	 
 
-`> jupyter notebook`
+Mapping of hough image on original image is done to achieve the final lane detected image.
+    <p align="center">
+	<img width="25%" height="25%" alt="Final Image" src="./test_images_output/final.png">
+	</p>
 
-A browser window will appear showing the contents of the current directory.  Click on the file called "P1.ipynb".  Another browser window will appear displaying the notebook.  Follow the instructions in the notebook to complete the project.  
+![Pipeline flow][flow]
 
-**Step 3:** Complete the project and submit both the Ipython notebook and the project writeup
 
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
+### 2. Potential shortcomings with my current pipeline
+
+This pipeline is not robust to the following conditions :
+
+* If there is huge amount of noise in the region of interest (edges which are not produced from the lanes), the algorithm\
+  cannot decide which one represent the lines
+* Drastic changes in the lanes direction, if we are driving around twisty roads, this system won't be capable\
+  to detect the lines, since we are using averages from the past frames,and also the drastic changes will be considered\
+  as an outliers(noise)
+  
+### 3. Possible improvements to my pipeline
+
+* We can obtain some slight improvements if we use Linear regression or for example Nearest Neighbour heuristic can help to find the hough point that has the most neighbours, so we can draw that point instead of calculating average, but it won't solve the main problems above.
+* A possible solution would be the using of non-linear models that can learn how one lane is represented in the road, considering not only the edges, but many features as well.\
+I think that Neural networks, especially Convolutional Neural Networks can be trained to get all
+the regions(anchors) representing the lanes, so we draw curve among the anchors, with using spline interpolations or similar numeric methods.
+* I think that this model will solve the shortcomings mentioned before, the best power is that we can train the model
+  with data generated from different conditions with different type of noise,\
+  so our system can be more robust and if properly trained, it can adapt to all drastic changes that can happen.
+
+
+
 
