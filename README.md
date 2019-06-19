@@ -21,11 +21,11 @@ The goals / steps of this project are the following:
 [flow]: ./results/flow.jpg "Flow"
 [formula]: ./results/formula.png "Formula"
 [hough]:  ./results/hough.png "hough transform"
-[grayscale]: ./test_images_output/grascale.png
-[hough]: ./test_images_output/hough.png
-[canny]: ./test_images_output/canny.png
-[result]: ./test_images_output/final.png
-[roi]:  ./test_images_output/region.png
+[grayscale]: ./test_images_output/grascale.PNG
+[hough]: ./test_images_output/hough.PNG
+[canny]: ./test_images_output/canny.PNG
+[result]: ./test_images_output/final.PNG
+[roi]:  ./test_images_output/region.PNG
 ---
 
 
