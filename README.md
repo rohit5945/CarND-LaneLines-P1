@@ -36,7 +36,7 @@ The goals / steps of this project are the following:
 	* Each pixel can now be represented by a 8-bit integer number(0-255) 
 	
     	<p align="center">
-		<img width="25%" height="25%" alt="grayscale" src="./test_images_output/grayscale.PNG">
+		<img width="50%" height="50%" alt="grayscale" src="./test_images_output/grayscale.PNG">
 	    </p>
 
  
@@ -49,7 +49,7 @@ The goals / steps of this project are the following:
     
     
 	    <p align="center">
-		<img width="25%" height="25%" alt="Canny edge detection" src="./test_images_output/canny.PNG">
+		<img width="50%" height="50%" alt="Canny edge detection" src="./test_images_output/canny.PNG">
 	    </p>
 	    
 - Region of interest:
@@ -58,7 +58,7 @@ The goals / steps of this project are the following:
     
     
 	    <p align="center">
-		<img width="25%" height="25%" alt="region of interest" src="./test_images_output/roi.PNG">
+		<img width="50%" height="50%" alt="region of interest" src="./test_images_output/region.PNG">
 	    </p>
 - Hough transform:
     *  Previous steps gives us many points as edges of lane but we are more interested in continuous edge line. 
@@ -66,13 +66,13 @@ The goals / steps of this project are the following:
     
     
 	    <p align="center">
-		<img width="25%" height="25%" alt="hough space" src="./test_images_output/hough.PNG">
+		<img width="50%" height="50%" alt="hough space" src="./test_images_output/hough.PNG">
 	    </p>
 	 
 
 Mapping of hough image on original image is done to achieve the final lane detected image.
     <p align="center">
-	<img width="25%" height="25%" alt="Final Image" src="./test_images_output/final.PNG">
+	<img width="50%" height="50%" alt="Final Image" src="./test_images_output/final.PNG">
 	</p>
 
 ![Pipeline flow][flow]
